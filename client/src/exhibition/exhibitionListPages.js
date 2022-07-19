@@ -7,8 +7,20 @@ import { useState, useEffect } from 'react';
 import ExhibitionProject from './exhibitionProject';
 import PaginationContents from '../proposal/paginationContents';
 import WriteComp from '../proposal/writeComponent';
+import { useSelector, useDispatch } from 'react-redux';
+import { exhProjects } from '../store/userStore';
 
 const ExhibitionList = () => {
+  let state = useSelector((state) => state.project);
+  console.log(state);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(exhProjects()).then((res) => {
+      setProject(res.data);
+    });
+  }, []);
+  console.log(state);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);

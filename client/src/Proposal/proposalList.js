@@ -4,8 +4,17 @@ import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
 import data from '../data/data';
+import { useSelector, useDispatch } from 'react-redux';
+import { exhProjects } from '../store/userStore';
 
 const ProposalList = () => {
+  let state = useSelector((state) => state.project);
+  console.log(state);
+
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(exhProjects());
+  // }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [project, setProject] = useState([]);

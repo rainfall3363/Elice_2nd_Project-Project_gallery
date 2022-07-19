@@ -16,14 +16,22 @@ import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
 import { exhibitionProjects } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
+import { useSelect } from '@mui/base';
+import { useSelector, useDispatch } from 'react-redux';
+import { exhProjects } from './store/userStore';
 function App() {
-  useEffect(() => {
-    exhibitionProjects();
-  }, []);
+  let state = useSelector((state) => state.project);
+  console.log(state);
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(exhProjects());
+  // }, []);
+
   return (
     <BrowserRouter>
       <div className="App">
         <HomeNav />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
