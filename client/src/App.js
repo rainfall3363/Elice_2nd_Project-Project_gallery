@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useParams } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home/home';
 //import Footer from './footer/Footer';
@@ -14,11 +14,12 @@ import HomeNav from './home/homenav';
 import ProposalList from './proposal/proposalList';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
-import { exhibitionProjects } from './api/exhibition/exhibitionProject';
+import { exhibition } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
 import { useSelect } from '@mui/base';
 import { useSelector, useDispatch } from 'react-redux';
-import { exhProjects } from './store/userStore';
+// import { exhProjects } from './store/userStore';
+
 function App() {
   let state = useSelector((state) => state.project);
   console.log(state);
@@ -27,6 +28,14 @@ function App() {
   //   dispatch(exhProjects());
   // }, []);
 
+  const [exhibitionProject, setExhibitionProject] = useState([]);
+
+  useEffect(() => {});
+  exhibition.exhibitionProjects().then((res) => {
+    setExhibitionProject(res.data);
+  }, []);
+
+  console.log(exhibitionProject);
   return (
     <BrowserRouter>
       <div className="App">
@@ -41,7 +50,10 @@ function App() {
             element={<PropsalDetail exhibitionProject={exhibitionProject} />}
           />
           <Route path="/register" element={<Register />} />
-          <Route path="/exhibitionList" element={<ExhibitionList />} />
+          <Route
+            path="/exhibitionList"
+            element={<ExhibitionList exhibitionProject={exhibitionProject} />}
+          />
           <Route
             path="/exhibitionDetail/:id"
             element={<ExhibitionDetail exhibitionProject={exhibitionProject} />}

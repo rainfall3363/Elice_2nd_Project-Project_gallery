@@ -10,22 +10,13 @@ import WriteComp from '../proposal/writeComponent';
 import { useSelector, useDispatch } from 'react-redux';
 import { exhProjects } from '../store/userStore';
 
-const ExhibitionList = () => {
-  let state = useSelector((state) => state.project);
-  console.log(state);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(exhProjects()).then((res) => {
-      setProject(res.data);
-    });
-  }, []);
-  console.log(state);
+const ExhibitionList = ({ exhibitionProject }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
+
   useEffect(() => {
-    setProject(displayData);
+    setProject(exhibitionProject);
   }, []);
   console.log(project);
   const totalPosts = project.length;
@@ -33,7 +24,10 @@ const ExhibitionList = () => {
 
   const inexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = inexOfLastPost - postsPerPage;
-  const currentPosts = project.slice(indexOfFirstPost, inexOfLastPost);
+  const currentPosts = exhibitionProject.slice(
+    indexOfFirstPost,
+    inexOfLastPost
+  );
   //
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -46,7 +40,7 @@ const ExhibitionList = () => {
       <h5>이런 프로젝트는 어떠신가요 ?!</h5>
 
       <PaginationContents
-        project={project}
+        project={exhibitionProject}
         postsPerPage={postsPerPage}
         paginate={paginate}
         currentPage={currentPage}

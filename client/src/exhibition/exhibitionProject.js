@@ -33,7 +33,7 @@ const ExhibitionProject = ({ projects }) => {
             key={i}
             component="img"
             height="180"
-            image={project.image}
+            image={project.images[0]}
             alt="image"
             onClick={() => {
               navigate(`/exhibitionDetail/${i}`);
@@ -63,7 +63,7 @@ const ExhibitionProject = ({ projects }) => {
                   color: 'white',
                 }}
               >
-                {project.contents}
+                {project.description}
               </Typography>
             </div>
           </CardContent>

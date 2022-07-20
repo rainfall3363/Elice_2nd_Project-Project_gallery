@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { exhibitionProjects } from '../api/exhibition/exhibitionProject';
+//import { exhibitionProjects } from '../api/exhibition/exhibitionProject';
 import axios from 'axios';
 
 // let initialState = function () {
@@ -8,11 +8,7 @@ import axios from 'axios';
 const project = createSlice({
   name: 'exhibitionProject',
   initialState: '',
-  reducers: {
-    exhProjects(state) {
-      return exhibitionProjects();
-    },
-  },
+  reducers: {},
 });
 export const { exhProjects } = project.actions;
 
